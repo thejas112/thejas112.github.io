@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thejas N - AI Solutions Architect | GenAI | ML | CAE</title>
+    <meta name="description" content="AI Solutions Architect with 13+ years in Automotive Manufacturing. Expertise in Generative AI, RAG systems, ML optimization, and Azure cloud solutions.">
+    
+    <style>
+        #password-screen {
+    position: fixed;
+    inset:0;
+    background:#0f172a;
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+.login-box {
+
+    background:#1e293b;
+    padding:40px;
+    width:350px;
+
+    border-radius:15px;
+    text-align:center;
+
+    border:1px solid #00d4ff;
+}
+
+
+.login-box input {
+
+    width:100%;
+    padding:12px;
+    margin:20px 0;
+
+    background:#0f172a;
+    color:white;
+
+    border:1px solid #00d4ff;
+    border-radius:8px;
+}
+
+
+.login-box button {
+
+    padding:12px 30px;
+
+    background:#00d4ff;
+    border:none;
+
+    border-radius:8px;
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+
+#error-msg {
+    color:red;
+    margin-top:10px;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --secondary: #9333ea;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e1;
+            --accent: #f59e0b;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f3a 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.25rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: auto;
+            padding: 2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+            top: -300px;
+            right: -300px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
+            bottom: -200px;
+            left: -200px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        /* FIXED: Improved alignment for hero content */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 3rem;
+            align-items: flex-start;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .profile-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-photo-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(147, 51, 234, 0.2));
+            border: 3px dashed var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
+            flex-shrink: 0;
+        }
+        .profile-photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            border-radius: 1.2rem;
+        }
+
+        .photo-instruction {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* FIXED: Profile section heading */
+        .profile-section h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        /* FIXED: Stats grid - better proportioned */
+        .profile-stats {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(147, 51, 234, 0.1));
+            padding: 1.2rem;
+            border-radius: 0.8rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.15);
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            color: var(--text-secondary);
+            margin-top: 0.4rem;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .hero .tagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        /* FIXED: About text section */
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .highlight-item::before {
+            content: '→';
+            color: var(--primary);
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 0.6rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Tab Content */
+        .tab-container {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(147, 51, 234, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card .title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .project-card .category {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-details {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .business-value {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--success);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.4rem;
+        }
+
+        .business-value-title {
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+        }
+
+        .business-value-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .tech-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 0.3rem;
+            font-size: 0.75rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, var(--card-bg), rgba(0, 212, 255, 0.05));
+            padding: 1.8rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-item {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 0.9rem;
+            border-radius: 0.4rem;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+        }
+
+        .experience-item {
+            background: linear-gradient(135deg, var(--card-bg), rgba(147, 51, 234, 0.05));
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.1);
+        }
+
+        .experience-item .title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-item .company {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .experience-item .date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+            font-style: italic;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-item ul li {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .experience-item ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Accomplishments Section */
+        .accomplishments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .accomplishment-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(245, 158, 11, 0.05));
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            transition: all 0.3s;
+        }
+
+        .accomplishment-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.15);
+        }
+
+        .accomplishment-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .accomplishment-card .title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .accomplishment-card .description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Certifications Section */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(147, 51, 234, 0.05));
+            padding: 1.8rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .cert-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(147, 51, 234, 0.15);
+        }
+
+        .cert-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .cert-card .name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .cert-card .issuer {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .cert-link {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(0, 212, 255, 0.1));
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.4rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .cert-link:hover {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(0, 212, 255, 0.2));
+            border-color: var(--secondary);
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(16, 185, 129, 0.05));
+            padding: 1.8rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: all 0.3s;
+        }
+
+        .education-card:hover {
+            border-color: var(--success);
+            transform: translateY(-5px);
+        }
+
+        .education-card .degree {
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .education-card .school {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .details {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        #contact-tab {
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-intro {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .contact-link .icon {
+            font-size: 2.5rem;
+        }
+
+        .contact-link .label {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-screen">
+
+    <div class="login-box">
+        <h2>THEJAS N Portfolio</h2>
+        <p>Enter password to continue</p>
+
+        <input 
+        type="password" 
+        id="passwordInput"
+        placeholder="Password">
+
+        <button onclick="checkPassword()">
+            Enter
+        </button>
+
+        <p id="error-msg"></p>
+
+    </div>
+
+</div>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">THEJAS N</div>
+            <ul>
+                <li><a class="tab-link active" data-tab="about">About</a></li>
+                <li><a class="tab-link" data-tab="education">Education</a></li>
+                <li><a class="tab-link" data-tab="projects">Projects</a></li>
+                <li><a class="tab-link" data-tab="certifications">Certifications</a></li>
+                <li><a class="tab-link" data-tab="skills">Skills</a></li>
+                <li><a class="tab-link" data-tab="accomplishments">Key Accomplishments</a></li>
+                <li><a class="tab-link" data-tab="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+<!-- About Tab -->
+<div id="about" class="tab-container active">
+
+<section class="hero">
+
+<div class="hero-content">
+
+
+    <!-- LEFT PROFILE -->
+    <div class="profile-section">
+
+        <div class="profile-photo-placeholder">
+                <img 
+                src="images/THEJAS_N.png"
+                alt="Thejas N"></img>
+        </div>
+
+        <h2>THEJAS N</h2>
+
+        <div class="profile-stats">
+            <div class="stat-card">
+                <div class="number">4</div>
+                <div class="label">Years in Designing and Implementing AI/GenAI Solutions</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">8</div>
+                <div class="label">Years in FEA driven engineering workflows and virtual validation</div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT CONTENT -->
+    <div class="about-text">
+
+        <div class="highlights">
+
+            <div class="highlight-item">
+                AI Solution Architect with automotive manufacturing industry experience, combining AI/Generative AI capabilities with strong domain expertise in CAE/FEA-driven engineering workflows and virtual validation.
+            </div>
+
+
+            <div class="highlight-item">
+                Exposure to AI-driven engineering optimization concepts, including AI-assisted FEA/CAE workflows, Digital Twins, Synthetic Data Generation, and Physics-informed simulation techniques.
+            </div>
+
+
+            <div class="highlight-item">
+                Experienced in collaborating with global teams to deliver data-driven, customer-focused engineering and AI solutions with recommendations to meet the performance targets.
+            </div>
+            
+
+            <div class="highlight-item">
+                Collaborated with global teams and mentored engineers on technical workflows, best practices and solution delivery.
+            </div>
+
+            <div class="highlight-item">
+                Experienced in architecting enterprise-grade AI/Generative AI backend solutions.
+            </div>
+
+
+            <div class="highlight-item">
+                Strong documentation and stakeholder communication skills translating technical concepts into business solutions.
+            </div>
+
+
+        </div>
+
+
+        <div class="cta-buttons">
+
+            <a class="btn btn-primary tab-link"
+            data-tab="projects">
+            View Projects
+            </a>
+
+            <a class="btn btn-secondary tab-link"
+            data-tab="contact">
+            Contact
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</section>
+
+</div>
+
+    <!-- Projects Tab -->
+    <div id="projects" class="tab-container">
+        <section>
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <span class="category">Generative AI</span>
+                        <div class="title">Engineering knowledge AI Solution</div>
+                        <div class="project-details">
+                            <strong>Problem:</strong> Engineering knowledge distributed across multiple document formats requiring efficient retrieval and reuse<br>
+                            <strong>Solution:</strong> Architected secure Azure-based backend with document-level RBAC, multimodal processing and agentic retrieval pipeline.
+                        </div>
+                        <div class="business-value">
+                            <div class="business-value-title">BUSINESS VALUE</div>
+                            <div class="business-value-text">Improved engineering knowledge accessibility and enabled faster information discovery across technical documents.</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Azure OpenAI</span>
+                            <span class="tech-tag">Azure AI Search</span>
+                            <span class="tech-tag">Multimodal RAG</span>
+                            <span class="tech-tag">Cosmos DB for MongoDB</span>
+                            <span class="tech-tag">RBAC</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <span class="category">Generative AI - Patent Work</span>
+                        <div class="title">Intelligent Query Routing for LLM Selection</div>
+                        <div class="project-details">
+                            <strong>Problem:</strong> Selecting suitable LLM response strategy based on query complexity.<br>
+                            <strong>Solution:</strong> Developed cost-effective method using open-source LLMs for direct & elaborate query handling with follow-up support. 
+                        </div>
+                        <div class="business-value">
+                            <div class="business-value-title">BUSINESS VALUE</div>
+                            <div class="business-value-text">Enabled optimized LLM utilization and comprehensive response generation approach. Patent application filed.</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">LLMs</span>
+                            <span class="tech-tag">PEFT/LoRA</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Open-source</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <span class="category">Rule Based and Generative AI</span>
+                        <div class="title">Design Parameter Validation</div>
+                        <div class="project-details">
+                            <strong>Problem:</strong> Manual engineering parameter validation against design rules prone to inconsistency and delays.<br>
+                            <strong>Solution:</strong> Developed a retrieval and validation workflow integrating Document Intelligence, AI Search, Azure OpenAI and prompt engineering.
+                        </div>
+                        <div class="business-value">
+                            <div class="business-value-title">BUSINESS VALUE</div>
+                            <div class="business-value-text">Accelerated engineering validation workflows and improved design rule accessibility.</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Azure OpenAI</span>
+                            <span class="tech-tag">Document Intelligence</span>
+                            <span class="tech-tag">Azure AI Search</span>
+                            <span class="tech-tag">Automation</span>
+                            <span class="tech-tag">Deterministic Solution</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <span class="category">Machine Learning</span>
+                        <div class="title">Automotive program cost prediction and budget optimization</div>
+                        <div class="project-details">
+                            <strong>Problem:</strong> Improving estimation approach for automotive program cost planning.<br>
+                            <strong>Solution:</strong> Developed LightGBM model with uncertainty estimation using quantile regression.
+                        </div>
+                        <div class="business-value">
+                            <div class="business-value-title">BUSINESS VALUE</div>
+                            <div class="business-value-text">Improved budget utilization and supported data-driven program decisions.</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">LightGBM</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Azure Deployment</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="project-card">
+                        <span class="category">Machine Learning</span>
+                        <div class="title">AI Assisted FEA Optimization</div>
+                        <div class="project-details">
+                            <strong>Problem:</strong> Reducing dependency on repetitive simulation iterations during Engineering design.<br>
+                            <strong>Solution:</strong> Applied Machine Learning approach to predict engineering simulation outputs from design parameters.
+                        </div>
+                        <div class="business-value">
+                            <div class="business-value-title">BUSINESS VALUE</div>
+                            <div class="business-value-text">Supported faster design exploration and simulation-driven decision making.</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">FEA</span>
+                            <span class="tech-tag">Scikit-Learn</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="project-card">
+                        <span class="category">Engineering Validation</span>
+                        <div class="title">Virtual Validation of Automotive Exhaust System and Components using FEA</div>
+                        <div class="project-details">
+                            <strong>Problem:</strong> Physical prototyping expensive and slow. Multiple test iterations needed.<br>
+                            <strong>Solution:</strong> Performed static and dynamic FEA based virtual validation workflows.
+                        </div>
+                        <div class="business-value">
+                            <div class="business-value-title">BUSINESS VALUE</div>
+                            <div class="business-value-text">Supported early design evaluation and reduced dependency on physical iterations with cost savings.</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">FEA</span>
+                            <span class="tech-tag">Abaqus</span>
+                            <span class="tech-tag">HyperMesh</span>
+                            <span class="tech-tag">Optistruct</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Skills Tab -->
+    <div id="skills" class="tab-container">
+        <section>
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming & Tools</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Python</span>
+                            <span class="skill-item">Git</span>
+                            <span class="skill-item">VS Code</span>
+                            <span class="skill-item">PyCharm</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>CAE/FEA Tools</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">HyperMesh</span>
+                            <span class="skill-item">OptiStruct</span>
+                            <span class="skill-item">Abaqus</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Generative AI</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">LLMs</span>
+                            <span class="skill-item">Prompt Engineering</span>
+                            <span class="skill-item">RAG</span>
+                            <span class="skill-item">AI Agents</span>
+                            <span class="skill-item">PEFT/LoRA</span>
+                            <span class="skill-item">LangChain</span>
+                            <span class="skill-item">PyTorch</span>
+                            <span class="skill-item">Transformers</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Data Science & ML</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Statistics</span>
+                            <span class="skill-item">Data Analysis</span>
+                            <span class="skill-item">Supervised ML</span>
+                            <span class="skill-item">Scikit-Learn</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Azure Cloud Services</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Blob Storage</span>
+                            <span class="skill-item">OpenAI</span>
+                            <span class="skill-item">AI Search</span>
+                            <span class="skill-item">Cosmos DB for MongoDB</span>
+                            <span class="skill-item">App Service</span>
+                            <span class="skill-item">Document Intelligence</span>
+                            <span class="skill-item">Private Endpoints</span>
+                            <span class="skill-item">RBAC</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Software Development</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Production-grade Code</span>
+                            <span class="skill-item">Unit Testing</span>
+                            <span class="skill-item">Integration Testing</span>
+                            <span class="skill-item">Code Quality</span>
+                            <span class="skill-item">CI/CD Pipeline</span>
+                            <span class="skill-item">MLOps/GenAIOps Principles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Key Accomplishments Tab -->
+    <div id="accomplishments" class="tab-container">
+        <section>
+            <div class="container">
+                <h2>Key Accomplishments</h2>
+                <div class="accomplishments-grid">
+                    <div class="accomplishment-card">
+                        <div class="icon">🏆</div>
+                        <div class="title">Employee of the Month</div>
+                        <div class="description">Recognized for 25% budget improvement from Automotive Program Cost Prediction AI solution.</div>
+                    </div>
+                    <div class="accomplishment-card">
+                        <div class="icon">⭐</div>
+                        <div class="title">Star of the Month</div>
+                        <div class="description">Recognized for Generative AI patent contribution on Intelligent LLM Selection Method.</div>
+                    </div>
+                    <div class="accomplishment-card">
+                        <div class="icon">📜</div>
+                        <div class="title">Patent Filed</div>
+                        <div class="description">LLM Selection Method for Response Generation. Filed on September 2024.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Certifications Tab -->
+    <div id="certifications" class="tab-container">
+        <section>
+            <div class="container">
+                <h2>Certifications</h2>
+                
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 2rem; font-size: 1.4rem;">Microsoft Certified</h3>
+                    <div class="certs-grid">
+                        <div class="cert-card">
+                            <div class="icon">🏆</div>
+                            <div class="name">AI Business Professional</div>
+                            <div class="issuer">Microsoft (AB-730)</div>
+                            <a href="https://learn.microsoft.com/en-us/users/thejasn-4618/credentials/315bba32f08ba8cc?ref=https%3A%2F%2Fwww.linkedin.com%2F" class="cert-link" target="_blank">View Credential →</a>
+                        </div>
+                        <div class="cert-card">
+                            <div class="icon">🏆</div>
+                            <div class="name">AI Transformation Leader</div>
+                            <div class="issuer">Microsoft (AB-731)</div>
+                            <a href="https://learn.microsoft.com/en-us/users/thejasn-4618/credentials/d11f7f05cb9a27a1" class="cert-link" target="_blank">View Credential →</a>
+                        </div>
+                        <div class="cert-card">
+                            <div class="icon">🏆</div>
+                            <div class="name">Azure Data Scientist Associate</div>
+                            <div class="issuer">Microsoft (DP-100)</div>
+                            <a href="https://learn.microsoft.com/en-us/users/thejasn-4618/credentials/7eb498292516ccc9?ref=https%3A%2F%2Fwww.linkedin.com%2F" class="cert-link" target="_blank">View Credential →</a>
+                        </div>
+                        <div class="cert-card">
+                            <div class="icon">🏆</div>
+                            <div class="name">Azure AI Fundamentals</div>
+                            <div class="issuer">Microsoft (AI-900)</div>
+                            <a href="https://www.credly.com/badges/02567cc9-ea7f-46c6-8ab5-aa05aa4efe9e" class="cert-link" target="_blank">View Credential →</a>
+                        </div>
+                            <div class="cert-card">
+                            <div class="icon">🏆</div>
+                            <div class="name">Microsoft Certified Trainer</div>
+                            <div class="issuer">Microsoft</div>
+                            <a href="https://prod.mct.pvue2.com/assets/certificate.html?token=uhAxj5rdsp-ojgCKT9nAyW8JZvBlaAQ67n1bceDeQwk&url=https://prod-back.mct.pvue2.com" class="cert-link" target="_blank">View Credential →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 2rem; font-size: 1.4rem;">Other Certifications</h3>
+                    <div class="certs-grid">
+                        <div class="cert-card">
+                            <div class="icon">📜</div>
+                            <div class="name">Generative AI with Large Language Models</div>
+                            <div class="issuer">Coursera</div>
+                            <a href="https://www.coursera.org/account/accomplishments/verify/77FKYGFMFFQK" class="cert-link" target="_blank">View Credential →</a>
+                        </div>
+                        <div class="cert-card">
+                            <div class="icon">📜</div>
+                            <div class="name">Master's Program - Data Scientist</div>
+                            <div class="issuer">Simplilearn Certified in collaboration with IBM</div>
+                            <a href="https://success.simplilearn.com/b2f62076-e3ad-4110-92fd-f7399d0f2182#acc.xaqtSrjX" class="cert-link" target="_blank">View Credential →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+        <!-- Certifications Tab -->
+    <div id="education" class="tab-container">
+        <section>
+            <div class="container">
+                <h2>Education</h2>
+                    <div>
+                    <h3 style="color: var(--primary); margin-bottom: 2rem; font-size: 1.4rem;">Education</h3>
+                    <div class="education-grid">
+                        <div class="education-card">
+                            <div class="degree">MTech (Machine Design)</div>
+                            <div class="school">Bangalore Institute of Technology, Bangalore</div>
+                            <div class="details">2009 – 2011 | 77.71%</div>
+                        </div>
+                        <div class="education-card">
+                            <div class="degree">B.E. (Mechanical Engineering)</div>
+                            <div class="school">Ghousia College of Engineering, Ramanagaram</div>
+                            <div class="details">2005 – 2009 | 71.75%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<!-- Contact Tab -->
+<div id="contact" class="tab-container">
+
+    <section>
+
+        <div class="container">
+
+            <div class="contact-content">
+
+                <h2>Contact</h2>
+                <div class="contact-intro">
+                    Thank you for reviewing my portfolio. 
+                </div>
+
+                <div class="contact-links">
+                    <a 
+                    href="https://www.linkedin.com/in/thejas-n"
+                    class="contact-link"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        <div class="icon">🔗</div>
+                        <div class="label">
+                            Connect on LinkedIn
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Thejas N. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function checkPassword(){
+
+    const password =
+    document.getElementById("passwordInput").value;
+
+
+    if(password === "ThejasAI2026"){
+
+        document.getElementById(
+            "password-screen"
+        ).style.display="none";
+
+    }
+
+    else {
+
+        document.getElementById(
+            "error-msg"
+        ).innerHTML="Incorrect Password";
+
+    }
+}
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContainers = document.querySelectorAll('.tab-container');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const tabName = link.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and links
+                tabContainers.forEach(tab => tab.classList.remove('active'));
+                tabLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked tab and link
+                document.getElementById(tabName).classList.add('active');
+                link.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
