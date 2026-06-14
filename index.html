@@ -1386,9 +1386,11 @@
         <p>&copy; 2026 Thejas N. All rights reserved.</p>
     </footer>
 
-    <script>
-  // SHA-256 Password Authentication
+<script>
+
+        // SHA-256 Password Authentication
         async function checkPassword(){
+
 
             const password =
             document.getElementById("passwordInput").value;
@@ -1409,7 +1411,6 @@
                 .join("");
 
 
-            // SHA-256 hash for password
             const correctHash =
             "44329ea823699dc379f10b9e7740fb42cf3f603946d08fbb6fd7d1f6d5fb3829";
 
@@ -1428,17 +1429,30 @@
 
             }
 
-            else {
+            else{
 
                 document.getElementById(
                     "error-msg"
                 ).innerHTML="Incorrect Password";
 
             }
+
         }
 
 
-        // Remember access until browser tab closes
+        // Enter key support
+        function handleEnter(event){
+
+            if(event.key === "Enter"){
+
+                checkPassword();
+
+            }
+
+        }
+
+
+        // Remember unlock
         window.addEventListener(
         "load",
         function(){
